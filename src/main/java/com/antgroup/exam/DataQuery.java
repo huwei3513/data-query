@@ -31,13 +31,13 @@ public class DataQuery<T, R> {
         if (null == where) {
             result = data;
         } else {
-            result = data.parallelStream().filter(where).collect(toList());
+            result = data.stream().filter(where).collect(toList());
         }
         if (null != orderBy) {
-            result = result.parallelStream().sorted(orderBy).collect(toList());
+            result = result.stream().sorted(orderBy).collect(toList());
         }
         if (null != groupBy) {
-            Map<R, List<T>> resultMap = result.parallelStream().collect(groupingBy(groupBy));
+            Map<R, List<T>> resultMap = result.stream().collect(groupingBy(groupBy));
             result.clear();
             for (R r : resultMap.keySet()) {
                 result.addAll(resultMap.get(r));
