@@ -22,10 +22,10 @@ public class DataQuery<T> {
      * @return 查询结果数据集
      */
     //List<Student> query(List<Student> data, Where where, OrderBy orderBy, GroupBy groupBy, Limit limit);
-    public List<T> query(List<T> data, Where<T> where, String orderBy, String groupBy, String limit) {
+    public List<T> query(List<T> data, Where<T> where, OrderBy<T> orderBy, String groupBy, String limit) {
         List<T> result = new ArrayList<>();
         //return s.getAge() > 10 && s.getAge() < 9;
-        result = data.stream().filter(where).collect(Collectors.toList());
+        result = data.stream().filter(where).sorted(orderBy).collect(Collectors.toList());
         return result;
     }
 }

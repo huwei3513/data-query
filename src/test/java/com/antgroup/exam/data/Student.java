@@ -17,7 +17,7 @@ public class Student {
 
     private String name;
     private String className;
-    public byte age;
+    public Integer age;
     private Integer gender;
 
     @Override
