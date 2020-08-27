@@ -49,17 +49,9 @@ public class OrderBy<T> implements Comparator<T> {
                 continue;
             }
             if (OrderDirection.ASC.equals(direction)) {
-                if (isBigger > 0) {
-                    return -isBigger;
-                } else {
-                    return isBigger;
-                }
+                return isBigger;
             } else {
-                if (isBigger > 0) {
-                    return isBigger;
-                } else {
-                    return -isBigger;
-                }
+                return -isBigger;
             }
         }
         return result;
