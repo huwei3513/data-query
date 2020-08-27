@@ -1,4 +1,4 @@
-package com.antgroup.exam;
+package com.antgroup.exam.data;
 
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
@@ -17,8 +17,8 @@ public class Student {
 
     private String name;
     private String className;
-    public int age;
-    private int gender;
+    public byte age;
+    private Integer gender;
 
     @Override
     public String toString() {

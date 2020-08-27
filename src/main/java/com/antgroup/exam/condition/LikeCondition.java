@@ -3,18 +3,20 @@ package com.antgroup.exam.condition;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author huwei
- * @date 2020/8/26
+ * @date 2020/8/27
  */
-public class EqualCondition<T> implements Condition<T> {
+public class LikeCondition<T> implements Condition<T> {
 
     private final HashMap<String, Object> CONDITION_MAP = new HashMap<>();
 
     @Override
     public Condition<T> add(String fieldName, Object value) {
-        CONDITION_MAP.put(fieldName, value);
+        CONDITION_MAP.put(fieldName, value.toString());
         return this;
     }
 
@@ -23,7 +25,9 @@ public class EqualCondition<T> implements Condition<T> {
         JSONObject jsonObject = JSONObject.parseObject(t.toString());
         final boolean[] eqResult = {true};
         CONDITION_MAP.keySet().forEach(s -> {
-            eqResult[0] = eqResult[0] && CONDITION_MAP.get(s).equals(jsonObject.get(s));
+            Pattern pattern = Pattern.compile((String) CONDITION_MAP.get(s));
+            Matcher matcher = pattern.matcher(jsonObject.get(s).toString());
+            eqResult[0] = eqResult[0] && matcher.find();
         });
         return eqResult[0];
     }

@@ -1,7 +1,10 @@
-import com.antgroup.exam.condition.EqualCondition;
 import com.antgroup.exam.DataQuery;
-import com.antgroup.exam.Student;
 import com.antgroup.exam.Where;
+import com.antgroup.exam.common.DatatypeException;
+import com.antgroup.exam.condition.GreaterThanCondition;
+import com.antgroup.exam.condition.LikeCondition;
+import com.antgroup.exam.condition.NotEqualCondition;
+import com.antgroup.exam.data.Student;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -22,14 +25,19 @@ public class ApplicationTest {
     @Test
     public void testQuery() {
         List<Student> students = new ArrayList<>();
-        students.add(new Student("student1", "class1", 10, 1));
-        students.add(new Student("student2", "class1", 11, 0));
-        students.add(new Student("student3", "class1", 10, 0));
-        Where<Student> where = new Where<Student>()
-                .and(new EqualCondition<Student>().add("gender", 0))
-                .and(new EqualCondition<Student>().add("name", "student1"))
-                .or(new EqualCondition<Student>().add("age", 11));
-        List<Student> queryResult = DataQuery.query(students, where, "", "", "");
+        students.add(new Student("student1", "class1", (byte) 10, 1));
+        students.add(new Student("student2", "class1", (byte) 11, 0));
+        students.add(new Student("student3", "class1", (byte) 10, 0));
+        Where<Student> where = null;
+        try {
+            where = new Where<Student>()
+                    .and(new GreaterThanCondition<Student>(Student.class).add("age", 10))
+                    .and(new NotEqualCondition<Student>().add("gender", 0))
+                    .or(new LikeCondition<Student>().add("name", "student1"));
+        } catch (NoSuchFieldException | DatatypeException e) {
+            e.printStackTrace();
+        }
+        List<Student> queryResult = new DataQuery<Student>().query(students, where, "", "", "");
         queryResult.forEach(System.out::println);
     }
 }

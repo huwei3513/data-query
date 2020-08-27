@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 /**
  * @author huwei
- * @date 2020/8/26
+ * @date 2020/8/27
  */
-public class EqualCondition<T> implements Condition<T> {
+public class NotEqualCondition<T> implements Condition<T> {
 
     private final HashMap<String, Object> CONDITION_MAP = new HashMap<>();
 
@@ -23,7 +23,7 @@ public class EqualCondition<T> implements Condition<T> {
         JSONObject jsonObject = JSONObject.parseObject(t.toString());
         final boolean[] eqResult = {true};
         CONDITION_MAP.keySet().forEach(s -> {
-            eqResult[0] = eqResult[0] && CONDITION_MAP.get(s).equals(jsonObject.get(s));
+            eqResult[0] = eqResult[0] && !CONDITION_MAP.get(s).equals(jsonObject.get(s));
         });
         return eqResult[0];
     }

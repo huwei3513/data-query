@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * @author huwei
  * @date 2020/8/26
  */
-public class DataQuery {
+public class DataQuery<T> {
 
     /**
      * 根据条件查询数据，带排序、分组、数量限制
@@ -22,9 +22,8 @@ public class DataQuery {
      * @return 查询结果数据集
      */
     //List<Student> query(List<Student> data, Where where, OrderBy orderBy, GroupBy groupBy, Limit limit);
-    public static List<Student> query(List<Student> data, Where<Student> where, String orderBy, String groupBy, String limit) {
-        List<Student> result = new ArrayList<>();
-
+    public List<T> query(List<T> data, Where<T> where, String orderBy, String groupBy, String limit) {
+        List<T> result = new ArrayList<>();
         //return s.getAge() > 10 && s.getAge() < 9;
         result = data.stream().filter(where).collect(Collectors.toList());
         return result;
