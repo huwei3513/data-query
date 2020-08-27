@@ -3,6 +3,7 @@ package com.antgroup.exam;
 import com.antgroup.exam.condition.Condition;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -11,8 +12,8 @@ import java.util.function.Predicate;
  */
 public class Where<T> implements Predicate<T> {
 
-    private final HashSet<Condition<T>> AND_CONDITION_SET = new HashSet<>();
-    private final HashSet<Condition<T>> OR_CONDITION_SET = new HashSet<>();
+    private final Set<Condition<T>> AND_CONDITION_SET = new HashSet<>();
+    private final Set<Condition<T>> OR_CONDITION_SET = new HashSet<>();
 
     public Where<T> and(Condition<T> condition) {
         AND_CONDITION_SET.add(condition);

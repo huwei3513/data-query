@@ -1,6 +1,4 @@
-import com.antgroup.exam.DataQuery;
-import com.antgroup.exam.OrderBy;
-import com.antgroup.exam.Where;
+import com.antgroup.exam.*;
 import com.antgroup.exam.common.DatatypeException;
 import com.antgroup.exam.common.OrderDirection;
 import com.antgroup.exam.condition.GreaterThanCondition;
@@ -29,7 +27,7 @@ public class ApplicationTest {
         List<Student> students = new ArrayList<>();
         students.add(new Student("student1", "class1", 10, 1));
         students.add(new Student("student2", "class1", 11, 0));
-        students.add(new Student("student3", "class1", 10, 0));
+        students.add(new Student("student3", "class2", 10, 0));
         Where<Student> where = null;
         try {
             where = new Where<Student>()
@@ -42,7 +40,9 @@ public class ApplicationTest {
         OrderBy<Student> orderBy = new OrderBy<Student>()
                 .add("gender", OrderDirection.ASC)
                 .add("age", OrderDirection.ASC);
-        List<Student> queryResult = new DataQuery<Student>().query(students, where, orderBy, "", "");
+        GroupBy<Student, String> groupBy = new GroupBy<>("className");
+        Limit limit = new Limit(0, 1);
+        List<Student> queryResult = new DataQuery<Student, String>().query(students, where, orderBy, groupBy, limit);
         queryResult.forEach(System.out::println);
     }
 }

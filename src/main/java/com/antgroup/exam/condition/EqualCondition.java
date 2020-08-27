@@ -3,6 +3,7 @@ package com.antgroup.exam.condition;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author huwei
@@ -10,7 +11,7 @@ import java.util.HashMap;
  */
 public class EqualCondition<T> implements Condition<T> {
 
-    private final HashMap<String, Object> CONDITION_MAP = new HashMap<>();
+    private final Map<String, Object> CONDITION_MAP = new HashMap<>();
 
     @Override
     public Condition<T> add(String fieldName, Object value) {

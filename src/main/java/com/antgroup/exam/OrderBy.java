@@ -5,6 +5,7 @@ import com.antgroup.exam.common.OrderDirection;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Set;
  */
 public class OrderBy<T> implements Comparator<T> {
 
-    private final HashMap<String, OrderDirection> ORDER_MAP = new HashMap<>();
+    private final Map<String, OrderDirection> ORDER_MAP = new HashMap<>();
 
 
     public OrderBy<T> add(String fieldName, OrderDirection direction) {
