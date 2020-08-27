@@ -16,10 +16,10 @@ public interface Condition<T> {
     Condition<T> add(String fieldName, Object value);
 
     /**
-     * 获取查询条件映射
+     * 校验条件是否满足
      *
      * @param t 被校验对象
-     * @return 查询条件映射
+     * @return 条件是否成立
      */
     boolean check(T t);
 }

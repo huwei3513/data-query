@@ -27,6 +27,7 @@ public class ApplicationTest {
         students.add(new Student("student3", "class1", 10, 0));
         Where<Student> where = new Where<Student>()
                 .and(new EqualCondition<Student>().add("gender", 0))
+                .and(new EqualCondition<Student>().add("name", "student1"))
                 .or(new EqualCondition<Student>().add("age", 11));
         List<Student> queryResult = DataQuery.query(students, where, "", "", "");
         queryResult.forEach(System.out::println);
