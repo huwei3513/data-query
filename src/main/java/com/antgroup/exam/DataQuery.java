@@ -9,12 +9,14 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * 数据查询主类
+ *
  * @author huwei
  * @date 2020/8/26
  * T:待查询的数据类型
  * R:待分组字段的类型，目前只支持按单个字段分组
  */
-public class DataQuery<T, R> {
+public class DataQuery<T,R> {
 
     /**
      * 根据条件查询数据，带排序、分组、数量限制
@@ -26,7 +28,7 @@ public class DataQuery<T, R> {
      * @param limit   返回最大数量
      * @return 查询结果数据集
      */
-    public List<T> query(List<T> data, Where<T> where, OrderBy<T> orderBy, GroupBy<T, R> groupBy, Limit limit) {
+    public List<T> query(List<T> data,Where<T> where,OrderBy<T> orderBy,GroupBy<T, R> groupBy,Limit limit) {
         List<T> result = new ArrayList<>();
         if (null == where) {
             result = data;
@@ -59,7 +61,7 @@ public class DataQuery<T, R> {
             if (toIndex > result.size()) {
                 toIndex = result.size();
             }
-            result = result.subList(offset, toIndex);
+            result = result.subList(offset,toIndex);
         }
         return result;
     }

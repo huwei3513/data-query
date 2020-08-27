@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataQuery.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">data-query</a> &gt; <a href="index.source.html" class="el_package">com.antgroup.exam</a> &gt; <span class="el_source">DataQuery.java</span></div><h1>DataQuery.java</h1><pre class="source lang-java linenums">package com.antgroup.exam;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
+
+/**
+ * 数据查询主类
+ *
+ * @author huwei
+ * @date 2020/8/26
+ * T:待查询的数据类型
+ * R:待分组字段的类型，目前只支持按单个字段分组
+ */
+<span class="fc" id="L19">public class DataQuery&lt;T,R&gt; {</span>
+
+    /**
+     * 根据条件查询数据，带排序、分组、数量限制
+     *
+     * @param data    目标数据集
+     * @param where   查询条件
+     * @param orderBy 排序规则
+     * @param groupBy 分组规则
+     * @param limit   返回最大数量
+     * @return 查询结果数据集
+     */
+    public List&lt;T&gt; query(List&lt;T&gt; data,Where&lt;T&gt; where,OrderBy&lt;T&gt; orderBy,GroupBy&lt;T, R&gt; groupBy,Limit limit) {
+<span class="fc" id="L32">        List&lt;T&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (null == where) {</span>
+<span class="fc" id="L34">            result = data;</span>
+        } else {
+<span class="fc" id="L36">            result = data.stream().filter(where).collect(toList());</span>
+        }
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (null != orderBy) {</span>
+<span class="fc" id="L39">            result = result.stream().sorted(orderBy).collect(toList());</span>
+        }
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (null != groupBy) {</span>
+<span class="fc" id="L42">            Map&lt;R, List&lt;T&gt;&gt; resultMap = result.stream().collect(groupingBy(groupBy));</span>
+<span class="fc" id="L43">            result.clear();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for (R r : resultMap.keySet()) {</span>
+<span class="fc" id="L45">                result.addAll(resultMap.get(r));</span>
+<span class="fc" id="L46">            }</span>
+        }
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (null != limit) {</span>
+<span class="fc" id="L49">            int offset = limit.getOffset();</span>
+<span class="fc" id="L50">            int rows = limit.getRows();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (offset &lt; 0) {</span>
+<span class="fc" id="L52">                offset = 0;</span>
+            }
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (offset &gt; result.size()) {</span>
+<span class="fc" id="L55">                offset = result.size();</span>
+            }
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (rows &lt; 0) {</span>
+<span class="fc" id="L58">                rows = 0;</span>
+            }
+<span class="fc" id="L60">            int toIndex = offset + rows;</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">            if (toIndex &gt; result.size()) {</span>
+<span class="fc" id="L62">                toIndex = result.size();</span>
+            }
+<span class="fc" id="L64">            result = result.subList(offset,toIndex);</span>
+        }
+<span class="fc" id="L66">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,15 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+data-query,com.antgroup.exam.common,OrderDirection,0,24,0,0,0,3,0,1,0,1
+data-query,com.antgroup.exam.common,DatatypeException,0,4,0,0,0,2,0,1,0,1
+data-query,com.antgroup.exam.common,DigitalDataType,0,171,0,4,0,21,0,5,0,3
+data-query,com.antgroup.exam.condition,Condition,5,21,1,3,1,6,1,2,0,1
+data-query,com.antgroup.exam.condition,NotEqualCondition,0,59,1,3,0,10,1,5,0,4
+data-query,com.antgroup.exam.condition,EqualCondition,0,59,1,3,0,10,1,5,0,4
+data-query,com.antgroup.exam.condition,LikeCondition,0,68,1,3,0,12,1,5,0,4
+data-query,com.antgroup.exam.condition,GreaterThanCondition,0,85,2,6,0,17,2,6,0,4
+data-query,com.antgroup.exam.condition,LessThanCondition,0,85,2,6,0,17,2,6,0,4
+data-query,com.antgroup.exam,DataQuery,0,104,0,18,0,27,0,11,0,2
+data-query,com.antgroup.exam,Limit,0,15,0,0,0,3,0,3,0,3
+data-query,com.antgroup.exam,GroupBy,0,15,0,0,0,5,0,2,0,2
+data-query,com.antgroup.exam,Where,0,83,1,15,0,16,1,11,0,4
+data-query,com.antgroup.exam,OrderBy,11,92,8,12,3,26,5,8,0,3
