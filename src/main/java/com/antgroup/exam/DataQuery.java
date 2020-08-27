@@ -28,11 +28,17 @@ public class DataQuery<T, R> {
      */
     public List<T> query(List<T> data, Where<T> where, OrderBy<T> orderBy, GroupBy<T, R> groupBy, Limit limit) {
         List<T> result = new ArrayList<>();
-        if (null == groupBy) {
-            result = data.stream().filter(where).sorted(orderBy).collect(toList());
+        if (null == where) {
+            result = data;
         } else {
-            Map<R, List<T>> resultMap = data.stream().filter(where).sorted(orderBy).collect(groupingBy(groupBy));
-            System.out.println(resultMap);
+            result = data.parallelStream().filter(where).collect(toList());
+        }
+        if (null != orderBy) {
+            result = result.parallelStream().sorted(orderBy).collect(toList());
+        }
+        if (null != groupBy) {
+            Map<R, List<T>> resultMap = result.parallelStream().collect(groupingBy(groupBy));
+            result.clear();
             for (R r : resultMap.keySet()) {
                 result.addAll(resultMap.get(r));
             }
