@@ -24,7 +24,6 @@ public class OrderBy<T> implements Comparator<T> {
 
     @Override
     public int compare(T t1, T t2) {
-        int result = 0;
         JSONObject object1 = JSONObject.parseObject(t1.toString());
         JSONObject object2 = JSONObject.parseObject(t2.toString());
         Set<String> keySet = ORDER_MAP.keySet();
@@ -54,6 +53,6 @@ public class OrderBy<T> implements Comparator<T> {
                 return -isBigger;
             }
         }
-        return result;
+        return 0;
     }
 }

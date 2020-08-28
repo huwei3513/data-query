@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class WhereTest {
 
-    private List<Student> students = Student.getTestData(100);
+    private List<Student> students = Student.getTestData(10000);
 
     @Test
     public void testQueryDataWithoutCondition() {
         System.out.println("-------------------testQueryDataWithoutCondition:");
         List<Student> queryResult = new DataQuery<Student, String>()
                 .query(students,null,null,null,null);
-        Assert.assertEquals(100,queryResult.size());
+        Assert.assertEquals(10000,queryResult.size());
         queryResult.forEach(System.out::println);
         System.out.println("---------------------------------------------");
     }
